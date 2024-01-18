@@ -46,3 +46,7 @@
     --bc: 100% 0.011 17.35 !important;
   }
 }
+
+.input {
+  @apply !outline-none;
+}

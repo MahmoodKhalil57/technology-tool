@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { addListener, browserEval } from "./lib/utils/browserUtils";
+  import ProfileSettings from "./lib/components/section/profileSettings.svelte";
 
   const syncStores = async () => {
     await browserEval(`const currentObserver = new MutationObserver((mutationList, observer) => {
@@ -40,5 +41,5 @@
     ? 'resize-x overflow-x-auto'
     : ''}"
 >
-  Hey
+  <ProfileSettings />
 </div>
