@@ -1,8 +1,18 @@
-<script>
+<script lang="ts">
   import Savable from "../ui/savable.svelte";
+  import { selectedProfileStore } from "../../stores/settings";
 
-  let profileName = "Profile 1";
+  const profileState = {
+    get name() {
+      return $selectedProfileStore?.["name"];
+    },
+    set name(value) {
+      selectedProfileStore.update((store) => {
+        store["name"] = value ?? "";
+        return store;
+      });
+    },
+  };
 </script>
 
-{profileName}
-<Savable label="Profile Name" bind:value={profileName} harder />
+<Savable label="Profile Name" bind:value={profileState.name} harder />

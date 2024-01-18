@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import { addListener, browserEval } from "./lib/utils/browserUtils";
   import ProfileSettings from "./lib/components/section/profileSettings.svelte";
+  import { settingsStore } from "./lib/stores/settings";
 
   const syncStores = async () => {
     await browserEval(`const currentObserver = new MutationObserver((mutationList, observer) => {
@@ -35,6 +36,8 @@
 
   const dev = import.meta.env.DEV;
 </script>
+
+{JSON.stringify($settingsStore)}
 
 <div
   class="flex flex-col w-full py-3 items-center gap-3 {dev
