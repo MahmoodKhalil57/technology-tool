@@ -14,11 +14,35 @@
       });
     },
   };
+
+  const duplicateProfile = () => {
+    settingsStore.update((store) => {
+      if (!$selectedProfileStore) return store;
+      const newProfile = {
+        ...$selectedProfileStore,
+        name: `${$selectedProfileStore?.name} (Copy)`,
+      };
+      store.profile.options.push(newProfile);
+      store.profile.selected = store.profile.options.length - 1;
+      return store;
+    });
+  };
 </script>
 
-<Select
-  options={$settingsStore.profile.options.map((option) => option.name)}
-  bind:index={$settingsStore.profile.selected}
-/>
+{#key $settingsStore.profile.selected}
+  <Select
+    options={$settingsStore.profile.options.map((option) => option.name)}
+    bind:index={$settingsStore.profile.selected}
+    disableFirst={false}
+  />
 
-<Savable label="Profile Name" bind:value={profileState.name} harder />
+  <div class="flex flex-col items-start gap-2">
+    <Savable label="Profile Name" bind:value={profileState.name} harder />
+    <div>
+      <button class="link text-sm"> Delete </button>
+      <button class="link text-sm" on:click={duplicateProfile}>
+        Duplicate
+      </button>
+    </div>
+  </div>
+{/key}

@@ -32,7 +32,7 @@
   <div class="flex gap-5 items-end">
     <div>
       {#if !!label}
-        <div class="label">
+        <div class="label px-0">
           <span class="label-text">{label}</span>
         </div>
       {/if}
@@ -51,7 +51,7 @@
   <div class="flex gap-5 items-end">
     <div>
       {#if !!label}
-        <div class="label">
+        <div class="label px-0">
           <span class="label-text">{label}</span>
         </div>
       {/if}
@@ -63,13 +63,15 @@
         value={inputValState.value}
       />
     </div>
-    <button
-      class="link px-3 text-sm"
-      on:click={() => {
-        harder = !harder;
-      }}
-    >
-      Edit
-    </button>
+    <div class="flex flex-col">
+      <button
+        class="link px-3 text-sm"
+        on:click={() => {
+          harder = !harder;
+        }}
+      >
+        Edit
+      </button>
+    </div>
   </div>
 {/if}
