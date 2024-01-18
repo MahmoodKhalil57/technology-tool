@@ -1,6 +1,8 @@
 <script lang="ts">
-  export let options: string[] = [];
-  export let value: string;
+  type Value = $$Generic;
+  export let options: Value[] = [];
+  export let value: Value = options[0];
+  export let index = options.indexOf(value);
 
   let masked = {
     get index() {
@@ -8,6 +10,7 @@
     },
     set index(i) {
       value = options[i];
+      index = i;
     },
   };
 </script>
