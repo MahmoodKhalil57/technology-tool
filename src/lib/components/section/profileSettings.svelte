@@ -5,4 +5,4 @@
 </script>
 
 {profileName}
-<Savable label="Profile Name" bind:value={profileName} />
+<Savable label="Profile Name" bind:value={profileName} harder />
