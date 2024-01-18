@@ -1,0 +1,78 @@
+[
+  {
+    "iconeName": "tabler:typography",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:close-rounded",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "fluent:arrow-bidirectional-left-right-28-filled",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "ph:text-align-left",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "ph:text-align-right",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "ph:text-align-center",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:vertical-align-bottom-rounded",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:vertical-align-top-rounded",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:vertical-align-center-rounded",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "mdi:format-horizontal-align-center",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "mdi:format-horizontal-align-left",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "mdi:format-horizontal-align-right",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "mdi:format-vertical-align-bottom",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "mdi:format-vertical-align-top",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "mdi:format-vertical-align-center",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:format-bold",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:format-italic",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:format-underlined",
+    "iconeColored": false
+  },
+  {
+    "iconeName": "material-symbols:strikethrough-s",
+    "iconeColored": false
+  }
+]

@@ -1,0 +1,48 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ :root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  --b1: 26.03% 0 0;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}  */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: light) {
+  :root {
+    --b1: 93.89% 0.011 17.35 !important;
+    --bc: 0% 0.011 17.35 !important;
+  }
+}
+
+/* Styles for dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --b1: 26.03% 0 0 !important;
+    --bc: 100% 0.011 17.35 !important;
+  }
+}
