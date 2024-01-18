@@ -27,6 +27,60 @@
       return store;
     });
   };
+
+  const DELETEBUFFER = 3;
+  let deleteBufferTimer: number;
+  let deleteBuffer = DELETEBUFFER;
+
+  const setDeleteBuffer = () => {
+    deleteBufferTimer = setTimeout(() => {
+      if (deleteBuffer < DELETEBUFFER) {
+        deleteBuffer += 1;
+      }
+      if (deleteBuffer < DELETEBUFFER) {
+        setDeleteBuffer();
+      }
+    }, 1000);
+  };
+
+  const deleteProfile = () => {
+    if (deleteBufferTimer) {
+      clearTimeout(deleteBufferTimer);
+    }
+    setDeleteBuffer();
+
+    deleteBuffer--;
+    if (deleteBuffer <= 0) {
+      settingsStore.update((store) => {
+        if (!$selectedProfileStore) return store;
+        store.profile.options = store.profile.options.filter(
+          (option) => option.name !== $selectedProfileStore?.name
+        );
+        store.profile.selected = 0;
+        return store;
+      });
+      deleteBuffer = DELETEBUFFER;
+      clearTimeout(deleteBufferTimer);
+    }
+  };
+
+  $: deleteColor = (() => {
+    if ($settingsStore.profile.options.length < 2) {
+      return "text-neutral cursor-not-allowed";
+    }
+    switch (deleteBuffer) {
+      case 3:
+        return "";
+      case 2:
+        return "text-warning";
+      case 1:
+        return "text-error";
+      case 0:
+        return "text-error";
+      default:
+        return "";
+    }
+  })();
 </script>
 
 {#key $settingsStore.profile.selected}
@@ -39,7 +93,13 @@
   <div class="flex flex-col items-start gap-2">
     <Savable label="Profile Name" bind:value={profileState.name} harder />
     <div>
-      <button class="link text-sm"> Delete </button>
+      <button
+        class="link text-sm {deleteColor}"
+        on:click={deleteProfile}
+        disabled={$settingsStore.profile.options.length < 2}
+      >
+        Delete
+      </button>
       <button class="link text-sm" on:click={duplicateProfile}>
         Duplicate
       </button>
