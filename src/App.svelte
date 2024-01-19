@@ -3,6 +3,7 @@
   import { addListener, browserEval } from "./lib/utils/browserUtils";
   import ProfileSettings from "./lib/components/section/profileSettings.svelte";
   import { settingsStore } from "./lib/stores/settings";
+  import Controls from "./lib/components/section/controls.svelte";
 
   const syncStores = async () => {
     await browserEval(`const currentObserver = new MutationObserver((mutationList, observer) => {
@@ -45,4 +46,6 @@
     : ''}"
 >
   <ProfileSettings />
+
+  <Controls />
 </div>

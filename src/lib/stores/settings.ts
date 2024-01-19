@@ -6,6 +6,7 @@ const initSettings = {
     options: [
       {
         name: "Default",
+        autoFill: false,
       },
     ],
   },
