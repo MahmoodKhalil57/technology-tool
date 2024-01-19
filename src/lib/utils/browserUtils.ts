@@ -54,5 +54,3 @@ export const addListener = {
     }
   },
 };
-
-type x = Parameters<typeof chrome.tabs.onUpdated.addListener>[0];

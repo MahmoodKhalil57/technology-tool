@@ -7,7 +7,8 @@
   import AutofillPreference from "./lib/components/section/autofillPreference.svelte";
 
   const syncStores = async () => {
-    await browserEval(`const currentObserver = new MutationObserver((mutationList, observer) => {
+    try {
+      await browserEval(`const currentObserver = new MutationObserver((mutationList, observer) => {
       var customEvent = new CustomEvent("__msg-from-injected-script__", {
         domChanged: true,
       });
@@ -20,16 +21,17 @@
       subtree: true,
       });`);
 
-    addListener.onMessage(function (result, sender) {
-      // syncCssStores();
-      // syncContentStores();
-    });
+      addListener.onMessage(function (result, sender) {
+        // syncCssStores();
+        // syncContentStores();
+      });
 
-    addListener.onReload(function (tabId, changeInfo, tab) {
-      if (changeInfo.status === "complete") {
-        window.location.reload();
-      }
-    });
+      addListener.onReload(function (tabId, changeInfo, tab) {
+        if (changeInfo.status === "complete" && tab.active) {
+          window.location.reload();
+        }
+      });
+    } catch (error) {}
   };
 
   onMount(() => {

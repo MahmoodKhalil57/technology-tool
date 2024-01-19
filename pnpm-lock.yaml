@@ -14,6 +14,9 @@ dependencies:
   html:
     specifier: ^1.0.0
     version: 1.0.0
+  nanoid:
+    specifier: ^5.0.4
+    version: 5.0.4
   svelte-codemirror-editor:
     specifier: ^1.2.0
     version: 1.2.0(codemirror@6.0.1)(svelte@4.2.9)
@@ -1325,6 +1328,12 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
     dev: true
+
+  /nanoid@5.0.4:
+    resolution: {integrity: sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    dev: false
 
   /node-releases@2.0.14:
     resolution: {integrity: sha512-y10wOWt8yZpqXmOgRo77WaHEmhYQYGNA6y421PKsKYWEK8aW+cqAphborZDhqfyKrbZEN92CN1X2KbafY2s7Yw==}

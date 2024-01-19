@@ -33,6 +33,7 @@
     "@codemirror/lang-html": "^6.4.7",
     "@codemirror/theme-one-dark": "^6.1.2",
     "html": "^1.0.0",
+    "nanoid": "^5.0.4",
     "svelte-codemirror-editor": "^1.2.0"
   }
 }

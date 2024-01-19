@@ -1,6 +1,9 @@
 <script>
   import Checkbox from "../ui/checkbox.svelte";
-  import { selectedProfileStore } from "../../stores/settings";
+  import {
+    selectedProfileStore,
+    autoFillSelected,
+  } from "../../stores/settings";
 </script>
 
 {#if $selectedProfileStore?.autoFill !== undefined}
@@ -9,6 +12,7 @@
       class="btn active:btn-primary {$selectedProfileStore?.autoFill
         ? 'btn-disabled !cursor-not-allowed'
         : ''}"
+      on:click={autoFillSelected}
       disabled={$selectedProfileStore?.autoFill}
     >
       Fill

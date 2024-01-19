@@ -1,15 +1,12 @@
-import { derived, writable } from "svelte/store";
+import { derived, writable, get } from "svelte/store";
+import { customAlphabet } from "nanoid";
+import { browserEval } from "../utils/browserUtils";
+const randomAlpha = (size = 5) =>
+  customAlphabet("abcdefghijklmnopqrstuvwxyz", size)();
 
-export const preferenceModes = [
-  {
-    label: "Prefix",
-    value: "prefix",
-  },
-  {
-    label: "Suffix",
-    value: "suffix",
-  },
-];
+type PreferenceModes = "off" | "prefix" | "default" | "exact";
+
+type PreferenceType = "textByID";
 
 export const initSettings = {
   profile: {
@@ -20,11 +17,47 @@ export const initSettings = {
         autoFill: false,
         autofillPreferences: [
           {
-            type: "byID",
+            type: "textByID" satisfies PreferenceType,
             label: "Legal Name",
             value: "",
-            mode: "prefix",
+            mode: "off" satisfies PreferenceModes,
             target: "legal_name",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Prefix",
+                mode: "prefix",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "textByID" satisfies PreferenceType,
+            label: "Annual Turnover",
+            value: "",
+            mode: "off" satisfies PreferenceModes,
+            target: "annual_turnover",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "111",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
           },
         ],
       },
@@ -63,6 +96,43 @@ export let selectedProfileStore = {
       return settings;
     });
   },
+};
+
+export const autoFillSelected = async function () {
+  const option = get(selectedProfileStore);
+  if (option !== undefined) {
+    console.log(option.autofillPreferences.length);
+    for (const preference of option.autofillPreferences) {
+      let newValue = "";
+      switch (preference.mode.trim()) {
+        case "off":
+          continue;
+        case "prefix":
+          newValue = `${preference.value}${randomAlpha(5)}`;
+          break;
+        case "exact":
+          newValue = preference.value;
+          break;
+        case "default":
+          newValue = preference.availableModes.find((mode) => {
+            return mode.mode === preference.mode;
+          })?.value!;
+          break;
+      }
+
+      switch (preference.type) {
+        case "textByID":
+          if (!!newValue) {
+            try {
+              await browserEval(
+                `document.querySelectorAll("[id='${preference.target}']").forEach((el) => el.value="${newValue}")`
+              );
+            } catch (error) {}
+          }
+          break;
+      }
+    }
+  }
 };
 
 export let selectedProfileNameStore = {
