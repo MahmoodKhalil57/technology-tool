@@ -1,19 +1,11 @@
 <script lang="ts">
   import Savable from "../ui/savable.svelte";
-  import { selectedProfileStore, settingsStore } from "../../stores/settings";
+  import {
+    selectedProfileStore,
+    settingsStore,
+    selectedProfileNameStore,
+  } from "../../stores/settings";
   import Select from "../ui/select.svelte";
-
-  const profileState = {
-    get name() {
-      return $selectedProfileStore?.name;
-    },
-    set name(value) {
-      selectedProfileStore.update((store) => {
-        store.name = value ?? "";
-        return store;
-      });
-    },
-  };
 
   const duplicateProfile = () => {
     settingsStore.update((store) => {
@@ -56,7 +48,7 @@
         store.profile.options = store.profile.options.filter(
           (option) => option.name !== $selectedProfileStore?.name
         );
-        store.profile.selected = 0;
+        store.profile.selected = store.profile.options.length - 1;
         return store;
       });
       deleteBuffer = DELETEBUFFER;
@@ -89,9 +81,15 @@
     bind:index={$settingsStore.profile.selected}
     disableFirst={false}
   />
+{/key}
 
+{#key $selectedProfileNameStore}
   <div class="flex flex-col items-start gap-2">
-    <Savable label="Profile Name" bind:value={profileState.name} harder />
+    <Savable
+      label="Profile Name"
+      bind:value={$selectedProfileNameStore}
+      harder
+    />
     <div>
       <button
         class="link text-sm {deleteColor}"

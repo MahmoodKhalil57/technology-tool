@@ -1,9 +1,12 @@
 <script lang="ts">
+  import App from "../../../App.svelte";
+
   export let label = "";
   export let value = "";
-  export let inputVal = value;
   export let invalid = false;
   export let harder: boolean | undefined = undefined;
+
+  $: inputVal = value;
 
   export let onSave = () => {
     invalid = false;
@@ -42,6 +45,11 @@
         class="input input-bordered input-sm {invalid
           ? 'input-error'
           : 'input-primary'}"
+        on:keydown={(e) => {
+          if (e.key === "Enter") {
+            save();
+          }
+        }}
         bind:value={inputValState.value}
       />
     </div>

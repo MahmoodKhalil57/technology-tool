@@ -42,3 +42,15 @@ export let selectedProfileStore = {
     });
   },
 };
+
+export let selectedProfileNameStore = {
+  subscribe: derived(selectedProfileStore, ($selectedProfileStore) => {
+    return $selectedProfileStore?.name;
+  }).subscribe,
+  set: (value: string) => {
+    selectedProfileStore.update((store) => {
+      store.name = value;
+      return store;
+    });
+  },
+};
