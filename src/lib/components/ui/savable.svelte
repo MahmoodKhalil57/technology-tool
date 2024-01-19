@@ -1,10 +1,8 @@
 <script lang="ts">
-  import App from "../../../App.svelte";
-
   export let label = "";
   export let value = "";
   export let invalid = false;
-  export let harder: boolean | undefined = undefined;
+  export let locked: boolean | undefined = undefined;
 
   $: inputVal = value;
 
@@ -16,8 +14,8 @@
     if (doSave(inputVal)) {
       invalid = false;
       value = inputVal.trim();
-      if (harder != undefined) {
-        harder = true;
+      if (locked != undefined) {
+        locked = true;
       }
     }
   };
@@ -33,7 +31,7 @@
   };
 </script>
 
-{#if !harder}
+{#if !locked}
   <div class="flex gap-5 items-end">
     <div>
       {#if !!label}
@@ -77,7 +75,7 @@
       <button
         class="link px-3 text-sm"
         on:click={() => {
-          harder = !harder;
+          locked = false;
         }}
       >
         Edit

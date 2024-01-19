@@ -28,8 +28,6 @@
     deleteBufferTimer = setTimeout(() => {
       if (deleteBuffer < DELETEBUFFER) {
         deleteBuffer += 1;
-      }
-      if (deleteBuffer < DELETEBUFFER) {
         setDeleteBuffer();
       }
     }, 1000);
@@ -62,13 +60,13 @@
     }
     switch (deleteBuffer) {
       case 3:
-        return "";
+        return "active:scale-110";
       case 2:
-        return "text-warning";
+        return "text-warning hover:scale-105";
       case 1:
-        return "text-error !underline";
+        return "text-error !underline hover:scale-105 active:scale-110";
       case 0:
-        return "text-error !underline";
+        return "text-error !underline hover:scale-105 active:scale-110";
       default:
         return "";
     }
@@ -98,7 +96,7 @@
           )
         );
       }}
-      harder
+      locked
     />
     <div>
       <button
