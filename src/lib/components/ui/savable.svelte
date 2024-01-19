@@ -8,16 +8,18 @@
 
   $: inputVal = value;
 
-  export let onSave = () => {
-    invalid = false;
+  export let doSave = (inputVal: string) => {
+    return true;
   };
 
   export let save = () => {
-    value = inputVal;
-    if (harder != undefined) {
-      harder = true;
+    if (doSave(inputVal)) {
+      invalid = false;
+      value = inputVal.trim();
+      if (harder != undefined) {
+        harder = true;
+      }
     }
-    onSave();
   };
 
   let inputValState = {

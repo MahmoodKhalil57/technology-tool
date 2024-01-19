@@ -88,6 +88,16 @@
     <Savable
       label="Profile Name"
       bind:value={$selectedProfileNameStore}
+      doSave={(val) => {
+        return (
+          !!val &&
+          !$settingsStore.profile.options.some(
+            (option, index) =>
+              option.name.trim() === val.trim() &&
+              index !== $settingsStore.profile.selected
+          )
+        );
+      }}
       harder
     />
     <div>
