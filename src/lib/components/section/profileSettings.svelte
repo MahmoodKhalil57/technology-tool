@@ -71,6 +71,8 @@
         return "";
     }
   })();
+
+  let locked = true;
 </script>
 
 {#key $settingsStore.profile.selected}
@@ -96,18 +98,20 @@
           )
         );
       }}
-      locked
+      bind:locked
     />
     <div>
-      <button
-        class="link text-sm no-underline {deleteColor}"
-        on:click={deleteProfile}
-        disabled={$settingsStore.profile.options.length < 2}
-      >
-        Delete
-      </button>
       <button class="link text-sm" on:click={duplicateProfile}>
         Duplicate
+      </button>
+      <button
+        class="link text-sm no-underline {locked
+          ? 'invisible'
+          : ''} {deleteColor}"
+        on:click={deleteProfile}
+        disabled={$settingsStore.profile.options.length < 2 || locked}
+      >
+        Delete
       </button>
     </div>
   </div>

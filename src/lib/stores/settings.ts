@@ -7,6 +7,14 @@ const initSettings = {
       {
         name: "Default",
         autoFill: false,
+        autofillPreferences: [
+          {
+            type: "byID",
+            label: "Legal Name",
+            value: "",
+            mode: "prefix",
+          },
+        ],
       },
     ],
   },
