@@ -66,9 +66,9 @@
       case 2:
         return "text-warning";
       case 1:
-        return "text-error";
+        return "text-error !underline";
       case 0:
-        return "text-error";
+        return "text-error !underline";
       default:
         return "";
     }
@@ -92,7 +92,7 @@
     />
     <div>
       <button
-        class="link text-sm {deleteColor}"
+        class="link text-sm no-underline {deleteColor}"
         on:click={deleteProfile}
         disabled={$settingsStore.profile.options.length < 2}
       >

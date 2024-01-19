@@ -11,6 +11,7 @@ const initSettings = {
   },
 };
 
+// add undo/redo
 export let settingsStore = writable(initSettings);
 
 export let selectedProfileStore = {
