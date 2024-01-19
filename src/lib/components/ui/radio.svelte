@@ -4,6 +4,7 @@
   export let radioButtons = [] as { label: string; value: Value }[];
   export let id = "";
   export let Class = "";
+  export let disabled = false;
 </script>
 
 <div class="radio-buttons w-full join {Class}">
@@ -11,13 +12,14 @@
     <input
       id="{id}-{i}"
       type="radio"
-      class="btn bg-inherit join-item no-animation relative justify-center items-center border border-zinc-500 whitespace-nowrap text-gray-400 rounded-lg cursor-pointer text-[9px] px-2 py-1 h-auto !min-h-min
-      hover:bg-[#59585f]
-      checked:!bg-[#36363a] checked:!font-semibold checked:!border-base-300 checked:!cursor-default checked:!text-gray-300"
+      class="join-item btn cursor-pointer hover:backdrop-brightness-50 checked:backdrop-brightness-50 {disabled
+        ? 'btn-disabled cursor-not-allowed'
+        : ''}"
       name={id}
       value={radioButton.value}
       aria-label={radioButton.label}
       bind:group={value}
+      {disabled}
     />
   {/each}
 </div>

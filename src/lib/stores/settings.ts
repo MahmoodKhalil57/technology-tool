@@ -1,6 +1,17 @@
 import { derived, writable } from "svelte/store";
 
-const initSettings = {
+export const preferenceModes = [
+  {
+    label: "Prefix",
+    value: "prefix",
+  },
+  {
+    label: "Suffix",
+    value: "suffix",
+  },
+];
+
+export const initSettings = {
   profile: {
     selected: 0 as number | undefined,
     options: [
@@ -13,6 +24,7 @@ const initSettings = {
             label: "Legal Name",
             value: "",
             mode: "prefix",
+            target: "legal_name",
           },
         ],
       },

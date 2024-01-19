@@ -66,7 +66,7 @@
       <input
         type="text"
         placeholder="Type here"
-        class="input !input-bordered input-sm !input-primary"
+        class="input input-sm"
         disabled
         value={inputValState.value}
       />
