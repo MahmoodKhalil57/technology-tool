@@ -6,7 +6,7 @@ const randomAlpha = (size = 5) =>
 
 type PreferenceModes = "off" | "prefix" | "default" | "exact";
 
-type PreferenceType = "textByID";
+type PreferenceType = "textByID" | "selectByID";
 
 export const initSettings = {
   profile: {
@@ -19,8 +19,8 @@ export const initSettings = {
           {
             type: "textByID" satisfies PreferenceType,
             label: "Legal Name",
-            value: "",
-            mode: "off" satisfies PreferenceModes,
+            value: "autofill",
+            mode: "prefix" satisfies PreferenceModes,
             target: "legal_name",
             availableModes: [
               {
@@ -40,8 +40,8 @@ export const initSettings = {
           {
             type: "textByID" satisfies PreferenceType,
             label: "Annual Turnover",
-            value: "",
-            mode: "off" satisfies PreferenceModes,
+            value: "4444",
+            mode: "default" satisfies PreferenceModes,
             target: "annual_turnover",
             availableModes: [
               {
@@ -51,7 +51,139 @@ export const initSettings = {
               {
                 label: "Default",
                 mode: "default",
-                value: "111",
+                value: "4444",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "textByID" satisfies PreferenceType,
+            label: "Monthly Turnover",
+            value: "2",
+            mode: "default" satisfies PreferenceModes,
+            target: "monthly_card_turnover",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "2",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "textByID" satisfies PreferenceType,
+            label: "Average Transaction Value",
+            value: "2",
+            mode: "default" satisfies PreferenceModes,
+            target: "avg_tran_value",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "2",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "selectByID" satisfies PreferenceType,
+            label: "Business Entity",
+            value: "Partnership",
+            mode: "default" satisfies PreferenceModes,
+            target: "ownership_entity_type",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "Partnership",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "textByID" satisfies PreferenceType,
+            label: "Card Present Transactions",
+            value: "98",
+            mode: "default" satisfies PreferenceModes,
+            target: "sales_ftf_perc",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "98",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "textByID" satisfies PreferenceType,
+            label: "MOTO Transactions",
+            value: "1",
+            mode: "default" satisfies PreferenceModes,
+            target: "sales_moto_perc",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "1",
+              },
+              {
+                label: "Exact",
+                mode: "exact",
+              },
+            ],
+          },
+          {
+            type: "textByID" satisfies PreferenceType,
+            label: "Internet Transactions",
+            value: "1",
+            mode: "default" satisfies PreferenceModes,
+            target: "sales_internet_perc",
+            availableModes: [
+              {
+                label: "Off",
+                mode: "off",
+              },
+              {
+                label: "Default",
+                mode: "default",
+                value: "1",
               },
               {
                 label: "Exact",
@@ -125,7 +257,25 @@ export const autoFillSelected = async function () {
           if (!!newValue) {
             try {
               await browserEval(
-                `document.querySelectorAll("[id='${preference.target}']").forEach((el) => el.value="${newValue}")`
+                `if(!document.querySelector("input#${preference.target}")?.value)
+                document.querySelectorAll("input#${preference.target}").forEach((el) => {
+                  el.value="${newValue}"
+                  el.setAttribute('data-unmasked-value',"${newValue}")
+                })
+                `
+              );
+            } catch (error) {}
+          }
+          break;
+        case "selectByID":
+          if (!!newValue) {
+            try {
+              await browserEval(
+                `if(!document.querySelector("input#${preference.target}")?.value)
+                document.querySelectorAll("select#${preference.target}").forEach((el) => {
+                  el.value = Array.from(el.options).find((option) => option.innerText==="${newValue}").value
+                  el.nextSibling.firstChild.firstChild.firstChild.firstChild.firstChild.innerText="${newValue}"
+                })`
               );
             } catch (error) {}
           }
